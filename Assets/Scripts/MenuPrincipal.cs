@@ -13,6 +13,6 @@ public class MenuPrincipal : IEstado
     }
     public void Salir(MenuStateMachine menus)
     {
-
+        menus.controlMenus.menuPrincipal.SetActive(false);
     }
 }

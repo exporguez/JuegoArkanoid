@@ -48,13 +48,10 @@ public class MenuStateMachine : MonoBehaviour
         CambiarEstado(new MenuPrincipal());
     }
 
-    public void ReiniciarPartida()
+   
+
+    public void IrMenuPause()
     {
-
-    }
-
-    public void ModoPause()
-    {
-
+        CambiarEstado(new MenuPause());
     }
 }
