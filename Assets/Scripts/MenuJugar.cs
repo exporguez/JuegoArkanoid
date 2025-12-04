@@ -19,11 +19,7 @@ public class MenuJugar : IEstado
     }
     
     public void Ejecutar(MenuStateMachine menus)
-    {
-        if (Input.GetAxis("Horizontal") || Input.GetJoystickNames(Joystick))
-        {
-            
-        }
+    {       
         movimientoEjeX = Input.GetAxis("Horizontal") * Time.deltaTime * velocidadMovimiento;
         pala.transform.Translate(movimientoEjeX, 0f, 0f);
     }

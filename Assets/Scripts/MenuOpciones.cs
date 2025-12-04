@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class MenuOpciones : MonoBehaviour
+public class MenuOpciones : IEstado
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Entrar(MenuStateMachine menus)
     {
-        
+        menus.controlMenus.CerrarMenus();
+        menus.controlMenus.menuOpciones.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Ejecutar(MenuStateMachine menus)
     {
-        
+
+    }
+
+    public void Salir(MenuStateMachine menus)
+    {
+        menus.controlMenus.menuOpciones.SetActive(false);
     }
 }

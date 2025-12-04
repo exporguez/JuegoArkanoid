@@ -12,6 +12,6 @@ public class MenuSalir : IEstado
     }
     public void Salir(MenuStateMachine menus)
     {
-        menus.controlMenus.menuSalir.SetActive(false);
+        
     }
 }

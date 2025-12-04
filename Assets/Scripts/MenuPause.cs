@@ -9,7 +9,7 @@ public class MenuPause : IEstado
     }
     public void Ejecutar(MenuStateMachine menus)
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.))
+        if (Input.GetKeyDown(KeyCode.Escape)) //|| Input.GetKeyDown(KeyCode.))
         {
             menus.IrMenuPause();
         }
