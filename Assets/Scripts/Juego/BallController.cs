@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float velocidadInicial = 6f;// Velocidad inicial de la bola
+    private MovimientoJugador jugador;
+    public float velocidadInicial = 2f;// Velocidad inicial de la bola
     public GameObject ball; // Objeto bola
 
     private Rigidbody2D ballRb; // Rigidbody de la bola
@@ -16,6 +17,7 @@ public class BallController : MonoBehaviour
     private void Awake()
     {
         ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
+        jugador = FindFirstObjectByType<MovimientoJugador>();
     }
    
     void Update()
@@ -33,8 +35,9 @@ public class BallController : MonoBehaviour
 
     void PosicionarSobreJugador()
     {
-        var player = FindFirstObjectByType<MovimientoJugador>();
-        var playerPos = player.transform.position;
+        if (jugador == null) return;
+
+        var playerPos = jugador.transform.position;
 
         transform.position = playerPos + new Vector3(0, offsetY, 0);
     }
@@ -54,18 +57,20 @@ public class BallController : MonoBehaviour
     {
         if (!gameStarted) return;
 
-        Vector2 velocidad = ballRb.linearVelocity.normalized;
+        Vector2 direccionActual = ballRb.linearVelocity.normalized;
+        Vector2 nuevaDireccion;
 
         if (collision.gameObject.CompareTag("Jugador"))
         {
-            velocidad = RebotePala(collision);
+            nuevaDireccion = RebotePala(collision);
         }
         else
         {
-            AjustarAngulo(ref velocidad);
+            nuevaDireccion = direccionActual;
+            AjustarAngulo(ref nuevaDireccion);
         }
 
-        ballRb.linearVelocity = velocidad * velocidadInicial;
+        ballRb.linearVelocity = nuevaDireccion * velocidadInicial;
 
     }
 
@@ -87,18 +92,16 @@ public class BallController : MonoBehaviour
 
     void AjustarAngulo(ref Vector2 velocidadActual)
     {
-        const float minAngle = 0.5f; // �ngulo m�nimo en grados
+        const float minAngle = 0.2f; // �ngulo m�nimo en grados
 
         if (Mathf.Abs(velocidadActual.x) < minAngle)
-        {
-            float newX = Mathf.Sign(velocidadActual.x) * minAngle;
-            velocidadActual.x = newX;
+        {           
+            velocidadActual.x = Mathf.Sign(velocidadActual.x) * minAngle;
         }
 
         if (Mathf.Abs(velocidadActual.y) < minAngle)
         {
-            float newY = Mathf.Sign(velocidadActual.y) * minAngle;
-            velocidadActual.y = newY;
+            velocidadActual.y = Mathf.Sign(velocidadActual.y) * minAngle;
         }
 
         velocidadActual = velocidadActual.normalized;
