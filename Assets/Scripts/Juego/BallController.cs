@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float velocidadInicial = 10f;// Velocidad inicial de la bola
+    public float velocidadInicial = 6f;// Velocidad inicial de la bola
     public GameObject ball; // Objeto bola
 
     private Rigidbody2D ballRb; // Rigidbody de la bola
     private bool gameStarted = false;// Indica si el juego ha comenzado
-    private Vector3 offset;
+    
+
+    private float offsetY = 0.5f;
 
     private float maxReboteFactor = 1.5f; // Factor maximo de rebote en la pala
 
@@ -15,29 +17,28 @@ public class BallController : MonoBehaviour
     {
         ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
     }
-
-    void Start()
-    {
-        if (ball == null)
-        {
-            Debug.LogError("La bola no est� asignada en el inspector!");
-            return;
-        }
-
-        offset = transform.position - ball.transform.position; // Calculamos el offset inicial entre el jugador y la bola
-    }
+   
     void Update()
     {
-        if(!gameStarted)
+        if (!gameStarted)
         {
-            transform.position = ball.transform.position + offset; // Mantenemos la bola en la posici�n del jugador con el offset
+            PosicionarSobreJugador(); // Mantenemos la bola en la posici�n del jugador con el offset
 
-            if(Input.GetButtonDown("Jump")) // Iniciamos el juego al presionar el bot�n de salto
+            if (Input.GetButtonDown("Jump")) // Iniciamos el juego al presionar el bot�n de salto
             {
                 Lanzar();
             }
         }
     }
+
+    void PosicionarSobreJugador()
+    {
+        var player = FindFirstObjectByType<MovimientoJugador>();
+        var playerPos = player.transform.position;
+
+        transform.position = playerPos + new Vector3(0, offsetY, 0);
+    }
+
 
     public void Lanzar() // Funci�n para lanzar la bola
     {
@@ -54,7 +55,7 @@ public class BallController : MonoBehaviour
         if (!gameStarted) return;
 
         Vector2 velocidad = ballRb.linearVelocity.normalized;
-        
+
         if (collision.gameObject.CompareTag("Jugador"))
         {
             velocidad = RebotePala(collision);
@@ -63,9 +64,25 @@ public class BallController : MonoBehaviour
         {
             AjustarAngulo(ref velocidad);
         }
-        
+
         ballRb.linearVelocity = velocidad * velocidadInicial;
 
+    }
+
+    private void OnTriggerEnter2D(Collider other)
+    {
+        if(other.CompareTag("Vacio"))
+        {
+            Vidas.instance.PerderVidas();
+            ReiniciarPelota();
+        }
+    }
+
+    void ReiniciarPelota()
+    {
+        gameStarted = false;
+        ballRb.linearVelocity = Vector2.zero;
+        PosicionarSobreJugador();
     }
 
     void AjustarAngulo(ref Vector2 velocidadActual)
@@ -90,10 +107,10 @@ public class BallController : MonoBehaviour
     private Vector2 RebotePala(Collision2D collision)
     {
         Vector2 hitPoint = collision.contacts[0].point;
-        
+
         Collider2D collider2D = collision.collider;
 
-        if(collider2D == null) return ballRb.linearVelocity.normalized;
+        if (collider2D == null) return ballRb.linearVelocity.normalized;
 
         float hitOffset = collider2D.bounds.center.x - hitPoint.x;
 
@@ -109,4 +126,6 @@ public class BallController : MonoBehaviour
         return nuevaDireccion.normalized;
     }
 }
+
+    
 
