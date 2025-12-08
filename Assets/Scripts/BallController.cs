@@ -1,0 +1,112 @@
+using UnityEngine;
+
+public class BallController : MonoBehaviour
+{
+    public float velocidadInicial = 10f;// Velocidad inicial de la bola
+    public GameObject ball; // Objeto bola
+
+    private Rigidbody2D ballRb; // Rigidbody de la bola
+    private bool gameStarted = false;// Indica si el juego ha comenzado
+    private Vector3 offset;
+
+    private float maxReboteFactor = 1.5f; // Factor maximo de rebote en la pala
+
+    private void Awake()
+    {
+        ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
+    }
+
+    void Start()
+    {
+        if (ball == null)
+        {
+            Debug.LogError("La bola no est� asignada en el inspector!");
+            return;
+        }
+
+        offset = transform.position - ball.transform.position; // Calculamos el offset inicial entre el jugador y la bola
+    }
+    void Update()
+    {
+        if(!gameStarted)
+        {
+            transform.position = ball.transform.position + offset; // Mantenemos la bola en la posici�n del jugador con el offset
+
+            if(Input.GetButtonDown("Jump")) // Iniciamos el juego al presionar el bot�n de salto
+            {
+                Lanzar();
+            }
+        }
+    }
+
+    public void Lanzar() // Funci�n para lanzar la bola
+    {
+        if (ballRb == null) return;
+
+        gameStarted = true;
+
+        Vector2 lanzamientoDireccion = new Vector2(Random.Range(-1f, 1f), 1).normalized; // Direcci�n aleatoria hacia arriba
+        ballRb.linearVelocity = lanzamientoDireccion * velocidadInicial; // Asignamos la velocidad inicial a la bola
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!gameStarted) return;
+
+        Vector2 velocidad = ballRb.linearVelocity.normalized;
+        
+        if (collision.gameObject.CompareTag("Jugador"))
+        {
+            velocidad = RebotePala(collision);
+        }
+        else
+        {
+            AjustarAngulo(ref velocidad);
+        }
+        
+        ballRb.linearVelocity = velocidad * velocidadInicial;
+
+    }
+
+    void AjustarAngulo(ref Vector2 velocidadActual)
+    {
+        const float minAngle = 0.5f; // �ngulo m�nimo en grados
+
+        if (Mathf.Abs(velocidadActual.x) < minAngle)
+        {
+            float newX = Mathf.Sign(velocidadActual.x) * minAngle;
+            velocidadActual.x = newX;
+        }
+
+        if (Mathf.Abs(velocidadActual.y) < minAngle)
+        {
+            float newY = Mathf.Sign(velocidadActual.y) * minAngle;
+            velocidadActual.y = newY;
+        }
+
+        velocidadActual = velocidadActual.normalized;
+    }
+
+    private Vector2 RebotePala(Collision2D collision)
+    {
+        Vector2 hitPoint = collision.contacts[0].point;
+        
+        Collider2D collider2D = collision.collider;
+
+        if(collider2D == null) return ballRb.linearVelocity.normalized;
+
+        float hitOffset = collider2D.bounds.center.x - hitPoint.x;
+
+        float width = collider2D.bounds.size.x;
+
+        float hitX = -hitOffset / (width / 2f);
+
+        Vector2 nuevaDireccion = new Vector2(
+            hitX * maxReboteFactor,
+            1f
+        );
+
+        return nuevaDireccion.normalized;
+    }
+}
+

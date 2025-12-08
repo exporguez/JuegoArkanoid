@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Jugador
   layers:
   - Default
   - TransparentFX
@@ -41,11 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Fondo
+  - name: Background
     uniqueID: 3032730527
     locked: 0
-  - name: Game
+  - name: Gameplay
     uniqueID: 270982365
+    locked: 0
+  - name: Fareground
+    uniqueID: 3345974791
+    locked: 0
+  - name: UI
+    uniqueID: 1762071367
     locked: 0
   m_RenderingLayers:
   - Default
