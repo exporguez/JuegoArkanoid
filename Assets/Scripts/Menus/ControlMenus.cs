@@ -16,6 +16,8 @@ public class ControlMenus : MonoBehaviour
     public GameObject menuPause;
 
     public GameObject escenario;
+    public GameObject screenGameOver;
+    public GameObject screenVictoria;
 
 
     private void Awake()
@@ -42,6 +44,8 @@ public class ControlMenus : MonoBehaviour
         menuOpciones.SetActive(false);
         menuPause.SetActive(false);
         escenario.SetActive(false);
+        screenGameOver.SetActive(false);
+        screenVictoria.SetActive(false);
     }
 
     public void VolverMenuPrincipal()

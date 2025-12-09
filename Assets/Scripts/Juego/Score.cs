@@ -11,6 +11,9 @@ public class Score : MonoBehaviour
 
     public static int puntosFinales;
 
+    private int bloquesRestantes;
+    public MenuStateMachine menus;
+
     private void Awake()
     {
         if (instance == null)
@@ -50,5 +53,30 @@ public class Score : MonoBehaviour
     public void GuardarPuntosTotales()
     {
         puntosFinales = puntos;
+    }
+
+    public void BloqueCreado()
+    {
+        bloquesRestantes++;
+    }
+
+    public void BloqueDestruido()
+    {
+        bloquesRestantes--;
+        if(bloquesRestantes <= 0)
+        {
+            Victoria();
+        }
+    }
+
+    private void Victoria()
+    {
+        Debug.Log("Has ganado!");
+        GuardarPuntosTotales();
+        if(menus != null && menus.controlMenus != null)
+        {
+            menus.controlMenus.menuJugar.SetActive(false);
+            menus.controlMenus.screenVictoria.SetActive(true);
+        }
     }
 }

@@ -74,7 +74,7 @@ public class BallController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Vacio"))
         {

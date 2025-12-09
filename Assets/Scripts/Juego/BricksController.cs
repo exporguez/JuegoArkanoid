@@ -27,8 +27,12 @@ public class BricksController : MonoBehaviour
         else
         {
             maxHits = 1;
-            //Debug.LogError("El array esta vacio!");
-            //Destroy(gameObject);
+            
+        }
+
+        if(Score.instance != null)
+        {
+            Score.instance.BloqueCreado();
         }
     }
 
@@ -82,7 +86,10 @@ public class BricksController : MonoBehaviour
     {
         /*Anadir efectod de sonido, particulas, powerups, sumar puntos*/
 
-        
+        if(Score.instance != null)
+        {
+            Score.instance.BloqueDestruido();
+        }
 
         Destroy(gameObject);
     }

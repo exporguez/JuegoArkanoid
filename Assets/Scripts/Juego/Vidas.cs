@@ -7,9 +7,9 @@ public class Vidas : MonoBehaviour
 
     public static Vidas instance;
 
-    
+
     public GameObject[] vidas;
-    
+
     private int vidasContador;
 
     private void Awake()
@@ -18,43 +18,49 @@ public class Vidas : MonoBehaviour
         {
             instance = this;
         }
-            
+
         else if (instance != this)
         {
             Destroy(gameObject);
             return;
         }
-            
+
 
         vidasContador = vidas.Length;
     }
 
     public void PerderVidas()
     {
-        if(vidasContador > 0)
+        if (vidasContador <= 0)
         {
-            int indexOcultar = vidasContador - 1;
+            return;
+        }
 
-            if(indexOcultar >= 0 && indexOcultar < vidas.Length)
-            {
-                vidas[vidasContador].SetActive(false);
-            }
+        int indexOcultar = vidasContador - 1;
+
+        if (indexOcultar >= 0 && indexOcultar < vidas.Length)
+        {
+            vidas[indexOcultar].SetActive(false);
         }
 
         vidasContador--;
-        
 
-        if(vidasContador == 0)
+
+        if (vidasContador == 0)
         {
             Debug.Log("Has perdido");
 
-            if(Score.instance != null)
+            if (Score.instance != null)
             {
                 Score.instance.GuardarPuntosTotales();
             }
-            
-            //if(menus != null && menus.controlMenus != null)
-            //menus.controlMenus.screenGameOver.SetActive(true);
+
+            if (menus != null && menus.controlMenus != null)
+            {
+                menus.controlMenus.menuJugar.SetActive(false);
+                menus.controlMenus.screenGameOver.SetActive(true);
+            }
+                
         }
     }
 
