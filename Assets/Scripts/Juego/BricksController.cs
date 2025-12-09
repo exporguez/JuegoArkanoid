@@ -20,18 +20,28 @@ public class BricksController : MonoBehaviour
 
         if (maxHits > 0)
         {
-            spriteRenderer.sprite = blockState[0];
+            //spriteRenderer.sprite = blockState[0];
         }
         else
         {
-            Debug.LogError("El array esta vacio!");
-            Destroy(gameObject);
+            maxHits = 1;
+            //Debug.LogError("El array esta vacio!");
+            //Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Pelota"))
+        {
+            HitBlock();
         }
     }
 
     public void HitBlock()// Golpear el bloque
     {
         hitCount++;
+        
 
         if(blockPrefab != null)
         {
@@ -40,6 +50,10 @@ public class BricksController : MonoBehaviour
 
         if (hitCount >= maxHits)
         {
+            if(maxHits > 0)
+            {
+                //spriteRenderer.sprite = blockState[blockState.Length - 1];                
+            }
             DestroyBlock();
         }
         else
@@ -47,7 +61,17 @@ public class BricksController : MonoBehaviour
             UpdateSprite();
         }
     }
-    
+
+    public void UpdateSprite()// Actualizar el sprite del bloque segun los golpes recibidos
+    {
+        int spriteIndex = hitCount - 1;
+
+        if (spriteIndex >= 0 && spriteIndex < blockState.Length)
+        {
+            spriteRenderer.sprite = blockState[spriteIndex];
+        }
+    }
+
     public void DestroyBlock()// Destruir el bloque
     {
         /*Anadir efectod de sonido, particulas, powerups, sumar puntos*/
@@ -55,11 +79,5 @@ public class BricksController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void UpdateSprite()// Actualizar el sprite del bloque segun los golpes recibidos
-    {
-        if (hitCount < maxHits)
-        {
-            spriteRenderer.sprite = blockState[hitCount];
-        }
-    }  
+      
 }

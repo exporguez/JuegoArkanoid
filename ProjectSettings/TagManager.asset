@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Jugador
   - Paredes
+  - Pelota
   layers:
   - Default
   - TransparentFX

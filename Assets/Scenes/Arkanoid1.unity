@@ -2774,7 +2774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &555590754
 Transform:
   m_ObjectHideFlags: 0
@@ -4239,7 +4239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movimientoEjeX: 0
-  velocidadPlayer: 8
+  velocidadPlayer: 6
 --- !u!50 &932563688
 Rigidbody2D:
   serializedVersion: 5
@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 1150395847}
   m_Layer: 0
   m_Name: Bola
-  m_TagString: Untagged
+  m_TagString: Pelota
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6508,12 +6508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b982281e62d638e40a082d652c252bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpJugar: {fileID: 215105186}
-  tipoEaseIn: 27
-  tipoEaseOut: 26
-  duracionAnimacion: 0.5
-  tiempoEspera: 2
-  delayedCallID: 0
 --- !u!1 &1491793263
 GameObject:
   m_ObjectHideFlags: 0

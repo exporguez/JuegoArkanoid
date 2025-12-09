@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockState:
-  - {fileID: 21300000, guid: b9617ae273b2af945a8e651b3376aff2, type: 3}
   - {fileID: 7527601593301308832, guid: 306a6c8d4b1bd9043a2ea7758b30cc4b, type: 3}
   - {fileID: 1267762455821382491, guid: 8488ecad5b45c584b87d2b1300d5f55a, type: 3}
   - {fileID: -949803589365288465, guid: 9fa2ff5dda5d1ad478e0cecce53148ce, type: 3}
-  blockPrefab: {fileID: 7110752314131003897}
+  blockPrefab: {fileID: 0}
