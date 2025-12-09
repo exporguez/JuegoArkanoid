@@ -7,32 +7,53 @@ public class Vidas : MonoBehaviour
 
     public static Vidas instance;
 
-    [SerializeField]
+    
     public GameObject[] vidas;
-
     
     private int vidasContador;
 
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
-        else
-            Destroy(instance);
+        }
+            
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+            
 
         vidasContador = vidas.Length;
     }
 
     public void PerderVidas()
     {
-        vidasContador--;
+        if(vidasContador > 0)
+        {
+            int indexOcultar = vidasContador - 1;
 
-        vidas[vidasContador].SetActive(false);
+            if(indexOcultar >= 0 && indexOcultar < vidas.Length)
+            {
+                vidas[vidasContador].SetActive(false);
+            }
+        }
+
+        vidasContador--;
+        
 
         if(vidasContador == 0)
         {
             Debug.Log("Has perdido");
-            Score.instance.GuardarPuntosTotales();
+
+            if(Score.instance != null)
+            {
+                Score.instance.GuardarPuntosTotales();
+            }
+            
+            //if(menus != null && menus.controlMenus != null)
             //menus.controlMenus.screenGameOver.SetActive(true);
         }
     }

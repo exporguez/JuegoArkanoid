@@ -150,4 +150,6 @@ MonoBehaviour:
   blockState:
   - {fileID: -4166849791631517995, guid: 7d830bf4aad0f364993f2181d3ff8ca2, type: 3}
   - {fileID: -5361140290790361823, guid: db8d3334b330a5248ad3326d840b081f, type: 3}
+  - {fileID: -5361140290790361823, guid: db8d3334b330a5248ad3326d840b081f, type: 3}
   blockPrefab: {fileID: 0}
+  scoreValor: 100

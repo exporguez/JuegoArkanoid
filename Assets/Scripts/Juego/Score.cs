@@ -44,7 +44,7 @@ public class Score : MonoBehaviour
 
     public int ObtenerScore()
     {
-        return puntosFinales;
+        return puntos;
     }
 
     public void GuardarPuntosTotales()

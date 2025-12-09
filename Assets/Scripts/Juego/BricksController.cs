@@ -6,6 +6,8 @@ public class BricksController : MonoBehaviour
 
     public GameObject blockPrefab;
 
+    public int scoreValor = 100;
+
     private SpriteRenderer spriteRenderer;
     private int hitCount = 0;
     private int maxHits;
@@ -41,9 +43,13 @@ public class BricksController : MonoBehaviour
     public void HitBlock()// Golpear el bloque
     {
         hitCount++;
-        
 
-        if(blockPrefab != null)
+        if (Score.instance != null)
+        {
+            Score.instance.SumarPuntos(scoreValor);
+        }
+
+        if (blockPrefab != null)
         {
             Instantiate(blockPrefab, transform.position, Quaternion.identity);
         }
@@ -75,6 +81,8 @@ public class BricksController : MonoBehaviour
     public void DestroyBlock()// Destruir el bloque
     {
         /*Anadir efectod de sonido, particulas, powerups, sumar puntos*/
+
+        
 
         Destroy(gameObject);
     }
