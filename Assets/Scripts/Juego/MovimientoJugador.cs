@@ -7,11 +7,14 @@ public class MovimientoJugador : MonoBehaviour
     public float movimientoEjeX;
     public float velocidadPlayer = 8f;
 
+    private float limiteXMax = 2.696f;
+    private float limiteXMin = -2.696f;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>(); //obtenemos el rigidbody del jugador
     }
-  
+
 
     // Update is called once per frame
     void Update()
@@ -31,5 +34,14 @@ public class MovimientoJugador : MonoBehaviour
 
         Vector2 velocidadMovimiento = new Vector2(movimientoEjeX * velocidadPlayer, 0);
         playerRb.linearVelocity = velocidadMovimiento;
+
+        
+        /*
+        Vector2 posicionActual = playerRb.position;
+
+        float nuevaXClamp = Mathf.Clamp(posicionActual.x, limiteXMin, limiteXMax);
+
+        Vector2 posicionRestringida = new Vector2(nuevaXClamp, posicionActual.y);
+        playerRb.MovePosition(posicionRestringida);*/
     }
 }
