@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    public static BallController instance;
     private MovimientoJugador jugador;
     public float velocidadInicial = 2f;// Velocidad inicial de la bola
     public GameObject ball; // Objeto bola
@@ -16,8 +17,19 @@ public class BallController : MonoBehaviour
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
         jugador = FindFirstObjectByType<MovimientoJugador>();
+        
     }
    
     void Update()
@@ -46,7 +58,14 @@ public class BallController : MonoBehaviour
     public void Lanzar() // Funci�n para lanzar la bola
     {
         if (ballRb == null) return;
-
+        
+        if(!gameStarted)
+        {
+            if(Cronometro.instance != null)
+            {
+                Cronometro.instance.IniciarCronometro();
+            }
+        }
         gameStarted = true;
 
         Vector2 lanzamientoDireccion = new Vector2(Random.Range(-1f, 1f), 1).normalized; // Direcci�n aleatoria hacia arriba
@@ -83,7 +102,7 @@ public class BallController : MonoBehaviour
         }
     }
 
-    void ReiniciarPelota()
+    public void ReiniciarPelota()
     {
         gameStarted = false;
         ballRb.linearVelocity = Vector2.zero;

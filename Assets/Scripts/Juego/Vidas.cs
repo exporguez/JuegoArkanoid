@@ -50,6 +50,11 @@ public class Vidas : MonoBehaviour
         {
             Debug.Log("Has perdido");
 
+            if(Cronometro.instance != null)
+            {
+                Cronometro.instance.DetenerCronometro();
+            }
+
             if (Score.instance != null)
             {
                 Score.instance.GuardarPuntosTotales();
@@ -64,4 +69,16 @@ public class Vidas : MonoBehaviour
         }
     }
 
+    public void ReiniciarVidas()
+    {
+        vidasContador = vidas.Length;
+
+        foreach (GameObject vidaIcono in vidas)
+        {
+            if (vidaIcono != null)
+            {
+                vidaIcono.SetActive(true);
+            }
+        }
+    }
 }
