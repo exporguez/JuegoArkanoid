@@ -4,8 +4,7 @@ using UnityEngine.UI;
 public class ControlMenus : MonoBehaviour
 {
     public static ControlMenus Instance { get; private set; }
-    //public MenuStateMachine menus;
-    public ControlMenus controlMenus;
+    //public MenuStateMachine menus;    
 
     //Menus
     public GameObject menuPrincipal;
@@ -20,6 +19,11 @@ public class ControlMenus : MonoBehaviour
     public GameObject screenVictoria;
 
     public GameObject popUpJugar;
+    public GameObject popUpSalir;
+
+    public float duracionAnimacion = 0.5f;
+    public LeanTweenType tipoEaseIn = LeanTweenType.easeOutBack;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -83,5 +87,27 @@ public class ControlMenus : MonoBehaviour
     public void AbrirMenuSalir()
     {       
         menuSalir.SetActive(true);
+    }
+
+    public void SalirDelJuego()
+    {
+        Debug.Log("Saliendo del juego...");
+
+        UnityEditor.EditorApplication.isPlaying = false;
+
+    }
+
+    public void AnimarEntradaPopUps(GameObject popUp)// Animación de entrada para los pop-ups
+    {
+        LeanTween.cancel(popUp);
+
+        
+        popUp.SetActive(true);
+
+        
+        popUp.transform.localScale = Vector3.zero;
+
+        
+        LeanTween.scale(popUp, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);
     }
 }

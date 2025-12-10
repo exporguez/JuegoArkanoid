@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI_Texto Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI_Texto
+  m_TableCollectionNameGuidString: ad838b383d302454aa0cc592cd9eac84
+  m_Entries:
+  - m_Id: 181728714752
+    m_Key: _exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 776011259904
+    m_Key: _volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 843065597952
+    m_Key: _pts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 983344095232
+    m_Key: _time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1068433940480
+    m_Key: _pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1195877867520
+    m_Key: _win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1235035889664
+    m_Key: _defeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1476422279168
+    m_Key: _start
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7499732771938238745
+  references:
+    version: 2
+    RefIds:
+    - rid: 7499732771938238745
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1765408394222
