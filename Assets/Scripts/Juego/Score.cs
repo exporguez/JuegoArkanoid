@@ -85,6 +85,9 @@ public class Score : MonoBehaviour
             tiempoFinalPartida = Cronometro.instance.ObtenerTiempoActual();
         }
 
+        BallController.DestruirTodasLasBolas();
+        BallController.ReinstanciarBola();
+
         if (puntuacionFinal != null)
         {
             puntuacionFinal.text = puntosFinales.ToString();

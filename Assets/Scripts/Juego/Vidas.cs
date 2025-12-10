@@ -55,6 +55,11 @@ public class Vidas : MonoBehaviour
                 Cronometro.instance.DetenerCronometro();
             }
 
+            BallController.DestruirTodasLasBolas();
+            
+            
+            
+            
             if (Score.instance != null)
             {
                 Score.instance.GuardarPuntosTotales();

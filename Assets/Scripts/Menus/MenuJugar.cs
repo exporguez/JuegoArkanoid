@@ -8,6 +8,7 @@ public class MenuJugar : IEstado
 
     public void Entrar(MenuStateMachine menus)
     {
+
         if (Vidas.instance != null)
         {
             Vidas.instance.ReiniciarVidas();
@@ -19,19 +20,23 @@ public class MenuJugar : IEstado
             Score.instance.ActualizarTexto();
 
         }
-        
+
+        if (BallController.instance == null)
+        {
+            BallController.ReinstanciarBola();
+        }
 
         if (BallController.instance != null)
         {
             BallController.instance.ReiniciarPelota();
         }
 
+        
+
         Cronometro.instance.ReiniciarCronometro();
         menus.controlMenus.CerrarMenus();
         menus.controlMenus.menuJugar.SetActive(true);
         menus.controlMenus.escenario.SetActive(true);
-
-
         
     }
 
@@ -45,5 +50,4 @@ public class MenuJugar : IEstado
         menus.controlMenus.menuJugar.SetActive(false);
         menus.controlMenus.escenario.SetActive(false);
     }
-
 }

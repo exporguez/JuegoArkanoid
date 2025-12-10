@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BallController : MonoBehaviour
 {
@@ -9,7 +10,16 @@ public class BallController : MonoBehaviour
 
     private Rigidbody2D ballRb; // Rigidbody de la bola
     private bool gameStarted = false;// Indica si el juego ha comenzado
-    
+
+    public static GameObject ballPrefabToInstantiate;
+    public static Vector3 playerInitialPosition;
+
+    /// <summary>
+    /// PowerUps Settings
+    /// </summary>
+    public GameObject bolaPrefab;
+    public bool superFuerzaActiva = false;
+    public float duracionPowerUps = 5f;
 
     private float offsetY = 0.5f;
 
@@ -17,21 +27,20 @@ public class BallController : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        else
+        if (ball != null)
         {
-            Destroy(gameObject);
-            return;
+            ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
         }
-        
-        ballRb = ball.GetComponent<Rigidbody2D>();// Obtenemos el Rigidbody2D de la bola
+
+
         jugador = FindFirstObjectByType<MovimientoJugador>();
-        
+
     }
-   
+
     void Update()
     {
         if (!gameStarted)
@@ -58,10 +67,10 @@ public class BallController : MonoBehaviour
     public void Lanzar() // Funci�n para lanzar la bola
     {
         if (ballRb == null) return;
-        
-        if(!gameStarted)
+
+        if (!gameStarted)
         {
-            if(Cronometro.instance != null)
+            if (Cronometro.instance != null)
             {
                 Cronometro.instance.IniciarCronometro();
             }
@@ -72,9 +81,72 @@ public class BallController : MonoBehaviour
         ballRb.linearVelocity = lanzamientoDireccion * velocidadInicial; // Asignamos la velocidad inicial a la bola
     }
 
+    public void ActivarMultiBola()
+    {
+        // Si tienes un Prefab de la bola
+        if (bolaPrefab == null)
+        {
+            Debug.LogError("¡Asigna el Prefab de la bola en el Inspector!");
+            return;
+        }
+
+        // Crear dos copias de la bola actual
+        InstanciarNuevaBola(bolaPrefab, new Vector2(0.5f, 1f));
+        InstanciarNuevaBola(bolaPrefab, new Vector2(-0.5f, 1f));
+    }
+
+    void InstanciarNuevaBola(GameObject prefab, Vector2 direccion)
+    {
+        GameObject nuevaBola = Instantiate(prefab, transform.position, Quaternion.identity);
+        BallController nuevaBolaController = nuevaBola.GetComponent<BallController>();
+        if (nuevaBolaController != null)
+        {
+            nuevaBolaController.gameStarted = true;
+        }
+
+        Rigidbody2D nuevaBolaRb = nuevaBola.GetComponent<Rigidbody2D>();
+        nuevaBolaRb.linearVelocity = direccion.normalized * ballRb.linearVelocity.magnitude;
+
+    }
+
+    public void ActivarSuperFuerza()
+    {
+        superFuerzaActiva = true;
+        // La SuperFuerza durará 10 segundos
+        StartCoroutine(DesactivarSuperFuerzaDespuesDe(duracionPowerUps));
+    }
+
+    IEnumerator DesactivarSuperFuerzaDespuesDe(float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        superFuerzaActiva = false;
+        Debug.Log("SuperFuerza terminada.");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!gameStarted) return;
+
+        if (collision.gameObject.CompareTag("Bloque"))
+        {
+            BricksController bloque = collision.gameObject.GetComponent<BricksController>();
+
+            if (bloque != null)
+            {
+                /*if (superFuerzaActiva)
+                {
+                    collision.collider.enabled = false;
+                    bloque.DestroyBlock();
+                }
+                else
+                {
+                    bloque.HitBlock();
+                }*/
+                bloque.HitBlock();
+            }
+            return;
+
+        }
 
         Vector2 direccionActual = ballRb.linearVelocity.normalized;
         Vector2 nuevaDireccion;
@@ -89,23 +161,58 @@ public class BallController : MonoBehaviour
             AjustarAngulo(ref nuevaDireccion);
         }
 
-        ballRb.linearVelocity = nuevaDireccion * velocidadInicial;
+        float velocidadMantenida = ballRb.linearVelocity.magnitude;
 
+        if (velocidadMantenida < velocidadInicial)
+        {
+            velocidadMantenida = velocidadInicial;
+        }
+        ballRb.linearVelocity = nuevaDireccion * velocidadMantenida;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Vacio"))
+        if (other.CompareTag("Vacio"))
         {
-            Vidas.instance.PerderVidas();
-            ReiniciarPelota();
+            BallController[] todasLasBolas = FindObjectsOfType<BallController>();
+            int bolasRestantes = todasLasBolas.Length;
+
+            if (bolasRestantes <= 1)
+            {
+                Vidas.instance.PerderVidas();
+                ReiniciarPelota();
+            }
+            else
+            {
+                Destroy(gameObject);
+
+            }
+
+            
+
+            
+
+            /*if (other.CompareTag("Bloque"))
+            {
+                BricksController bloque = other.GetComponent<BricksController>();
+
+                if (bloque != null && superFuerzaActiva)
+                {
+                    bloque.DestroyBlock();
+                }
+            }*/
         }
     }
 
     public void ReiniciarPelota()
     {
         gameStarted = false;
-        ballRb.linearVelocity = Vector2.zero;
+
+        if (ballRb != null)
+        {
+            ballRb.linearVelocity = Vector2.zero;
+        }
+
         PosicionarSobreJugador();
     }
 
@@ -114,7 +221,7 @@ public class BallController : MonoBehaviour
         const float minAngle = 0.2f; // �ngulo m�nimo en grados
 
         if (Mathf.Abs(velocidadActual.x) < minAngle)
-        {           
+        {
             velocidadActual.x = Mathf.Sign(velocidadActual.x) * minAngle;
         }
 
@@ -147,7 +254,44 @@ public class BallController : MonoBehaviour
 
         return nuevaDireccion.normalized;
     }
+
+    public static void DestruirTodasLasBolas()
+    {
+        if (instance != null)
+        {
+            if(instance.jugador != null)
+            {
+                BallController.PrepararSiguienteBola(instance.bolaPrefab, instance.jugador.transform.position);
+            }
+            else
+            {
+                BallController.PrepararSiguienteBola(instance.bolaPrefab, Vector3.zero);
+            }
+        }
+
+        BallController[] todasLasBolas = FindObjectsOfType<BallController>();
+
+        foreach (BallController bolas in todasLasBolas)
+        {
+            Destroy(bolas.gameObject);
+        }
+        instance = null;
+    }
+
+    public static void PrepararSiguienteBola(GameObject prefab, Vector3 playerPos)
+    {
+        ballPrefabToInstantiate = prefab;
+        playerInitialPosition = playerPos;
+    }
+
+    public static void ReinstanciarBola()
+    {
+        if (ballPrefabToInstantiate != null)
+        {
+            Instantiate(ballPrefabToInstantiate, playerInitialPosition, Quaternion.identity);
+        }
+    }
 }
 
-    
+
 

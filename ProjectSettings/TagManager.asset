@@ -8,6 +8,7 @@ TagManager:
   - Paredes
   - Pelota
   - Vacio
+  - Bloque
   layers:
   - Default
   - TransparentFX

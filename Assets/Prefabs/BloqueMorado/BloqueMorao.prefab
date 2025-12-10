@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4226666027086181486}
   m_Layer: 0
   m_Name: BloqueMorao
-  m_TagString: Untagged
+  m_TagString: Bloque
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b6ab8f11a3e78da4eb4dbd005a93ff21, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -152,3 +152,17 @@ MonoBehaviour:
   - {fileID: -8781880953935109555, guid: 6f1ed827b4ff24941b941a96612755ad, type: 3}
   blockPrefab: {fileID: 0}
   scoreValor: 50
+  limiteNoPowerUp: 6
+  rangoPowerUp_1: 6
+  rangoPowerUp_2: 7
+  rangoPowerUp_3: 8
+  rangoPowerUp_4: 9
+  powerUpPrefabs:
+  - {fileID: 5182391632380386772, guid: 2e0abbcb8de38d142ada89f9dbb3e31a, type: 3}
+  - {fileID: 2979257827724557836, guid: 85dc24f2f070a89448e418bbfa893add, type: 3}
+  - {fileID: 48856084722459220, guid: 328872df95e1fdf4e9ed3fc2fd0d539d, type: 3}
+  - {fileID: 8922803281226308475, guid: 1173309c79a3c4a42bc83aaff13b0bdc, type: 3}
+  duracionTemblor: 0.1
+  magnitudTemblor: 0.1
+  temblorFrecuencia: 10
+  particulas: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
