@@ -31,6 +31,8 @@ public class BricksController : MonoBehaviour
     public int temblorFrecuencia = 10;
 
     public GameObject particulas;
+    public AudioClip explosionSound;
+    public float explosionVolume = 1.0f;
 
     private void Awake()
     {
@@ -119,10 +121,12 @@ public class BricksController : MonoBehaviour
 
     public void DestroyBlock() // Destruir el bloque
     {
-        // Efecto de partículas
+        
+        ReproducirExplosion();
+
         InstanciarParticulas(transform.position);
 
-        // Powerups
+       
         GenerarPowerUp();
 
         if (Score.instance != null)
@@ -224,6 +228,11 @@ public class BricksController : MonoBehaviour
                 Destroy(efecto, 0.5f);
             }
         }
+    }
+
+    public void ReproducirExplosion()
+    {
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position, explosionVolume);
     }
 
     /*public void DestruirParticulas(GameObject particulas)

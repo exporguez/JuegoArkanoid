@@ -12,6 +12,9 @@ public class Vidas : MonoBehaviour
 
     private int vidasContador;
 
+    public AudioClip derrotaSound;
+    public float derrotaVolume = 2f;
+
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +27,6 @@ public class Vidas : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
 
         vidasContador = vidas.Length;
     }
@@ -45,10 +47,11 @@ public class Vidas : MonoBehaviour
 
         vidasContador--;
 
-
         if (vidasContador == 0)
         {
             Debug.Log("Has perdido");
+
+            ReproducirSonidoDerrota();
 
             if(Cronometro.instance != null)
             {
@@ -56,10 +59,7 @@ public class Vidas : MonoBehaviour
             }
 
             BallController.DestruirTodasLasBolas();
-            
-            
-            
-            
+                       
             if (Score.instance != null)
             {
                 Score.instance.GuardarPuntosTotales();
@@ -85,5 +85,10 @@ public class Vidas : MonoBehaviour
                 vidaIcono.SetActive(true);
             }
         }
+    }
+
+    public void ReproducirSonidoDerrota()
+    {
+        AudioSource.PlayClipAtPoint(derrotaSound, transform.position, derrotaVolume);
     }
 }

@@ -166,3 +166,4 @@ MonoBehaviour:
   magnitudTemblor: 0.1
   temblorFrecuencia: 10
   particulas: {fileID: 1967835574231978638, guid: 3e196c9e632c76841a71cb6e2dc6d010, type: 3}
+  explosionSound: {fileID: 8300000, guid: b9e28047bdaef4209b56840c71df8dc3, type: 3}

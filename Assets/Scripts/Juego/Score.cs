@@ -17,6 +17,9 @@ public class Score : MonoBehaviour
     private int bloquesRestantes;
     public MenuStateMachine menus;
 
+    public AudioClip victoriaSound;
+    public float victoriaVolume = 2f;
+
     private void Awake()
     {
         if (instance == null)
@@ -85,6 +88,7 @@ public class Score : MonoBehaviour
             tiempoFinalPartida = Cronometro.instance.ObtenerTiempoActual();
         }
 
+        ReproducirSonidoVictoria();
         BallController.DestruirTodasLasBolas();
         BallController.ReinstanciarBola();
 
@@ -117,5 +121,10 @@ public class Score : MonoBehaviour
         bloquesRestantes = 0;
         
         ActualizarTexto();
+    }
+
+    public void ReproducirSonidoVictoria()
+    {
+        AudioSource.PlayClipAtPoint(victoriaSound, transform.position, victoriaVolume);
     }
 }

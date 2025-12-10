@@ -25,6 +25,9 @@ public class BallController : MonoBehaviour
 
     private float maxReboteFactor = 1.5f; // Factor maximo de rebote en la pala
 
+    public AudioClip bounceSound;
+    public float bounceVolume = 1f;
+
     private void Awake()
     {
         if (instance == null)
@@ -49,6 +52,10 @@ public class BallController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump")) // Iniciamos el juego al presionar el bot�n de salto
             {
+                if (ControlMenus.Instance != null && ControlMenus.Instance.popUpJugar != null)
+                {
+                    ControlMenus.Instance.popUpJugar.SetActive(false);
+                }
                 Lanzar();
             }
         }
@@ -127,6 +134,8 @@ public class BallController : MonoBehaviour
     {
         if (!gameStarted) return;
 
+        ReproducirRebote();
+
         if (collision.gameObject.CompareTag("Bloque"))
         {
             BricksController bloque = collision.gameObject.GetComponent<BricksController>();
@@ -187,10 +196,6 @@ public class BallController : MonoBehaviour
                 Destroy(gameObject);
 
             }
-
-            
-
-            
 
             /*if (other.CompareTag("Bloque"))
             {
@@ -290,6 +295,14 @@ public class BallController : MonoBehaviour
         {
             Instantiate(ballPrefabToInstantiate, playerInitialPosition, Quaternion.identity);
         }
+    }
+
+    public void ReproducirRebote()
+    {
+        if (bounceSound != null)
+        {
+            AudioSource.PlayClipAtPoint(bounceSound, transform.position, bounceVolume);
+        }            
     }
 }
 

@@ -6,6 +6,9 @@ public class PowerUps : MonoBehaviour
     public TipoPowerUp tipo;
     public float velocidadCaida = 3f;
 
+    public AudioClip powerUpSound;
+    public float powerUpSoundVolume = 2.0f;
+
     private void Update()
     {
         transform.Translate(Vector3.down * velocidadCaida * Time.deltaTime);
@@ -20,6 +23,7 @@ public class PowerUps : MonoBehaviour
     {
         if(other.CompareTag("Jugador"))
         {
+            ReproducirPremio();
             AplicarEfecto();
             Destroy(gameObject);
         }    
@@ -55,5 +59,10 @@ public class PowerUps : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void ReproducirPremio()
+    {
+        AudioSource.PlayClipAtPoint(powerUpSound, transform.position, powerUpSoundVolume);
     }
 }

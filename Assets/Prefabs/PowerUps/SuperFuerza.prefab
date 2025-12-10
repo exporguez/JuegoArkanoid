@@ -167,3 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 3
   velocidadCaida: 3
+  powerUpSound: {fileID: 8300000, guid: 6a1c983933aa94661a32c78db2888ae5, type: 3}
+  powerUpSoundVolume: 2

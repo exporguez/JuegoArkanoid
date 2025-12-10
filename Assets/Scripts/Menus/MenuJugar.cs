@@ -37,6 +37,7 @@ public class MenuJugar : IEstado
         menus.controlMenus.CerrarMenus();
         menus.controlMenus.menuJugar.SetActive(true);
         menus.controlMenus.escenario.SetActive(true);
+        menus.controlMenus.popUpJugar.SetActive(true);
         
     }
 

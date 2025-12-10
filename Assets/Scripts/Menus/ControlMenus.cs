@@ -19,7 +19,7 @@ public class ControlMenus : MonoBehaviour
     public GameObject screenGameOver;
     public GameObject screenVictoria;
 
-
+    public GameObject popUpJugar;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,6 +46,7 @@ public class ControlMenus : MonoBehaviour
         escenario.SetActive(false);
         screenGameOver.SetActive(false);
         screenVictoria.SetActive(false);
+        popUpJugar.SetActive(false);
     }
 
     public void VolverMenuPrincipal()
@@ -59,6 +60,7 @@ public class ControlMenus : MonoBehaviour
         CerrarMenus();
         menuJugar.SetActive(true);
         escenario.SetActive(true);
+        popUpJugar.SetActive(true);
     }
 
     public void AbrirMenuControles()
