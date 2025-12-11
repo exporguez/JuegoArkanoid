@@ -22,6 +22,34 @@ MonoBehaviour:
     m_Localized: Desea salir del juego?
     m_Metadata:
       m_Items: []
+  - m_Id: 162233589760
+    m_Localized: HAS GANADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 140993742495744
+    m_Localized: HAS PERDIDO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 141063753818112
+    m_Localized: Presiona ESPACIO para empezar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 141241734914048
+    m_Localized: PAUSA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 141706719649792
+    m_Localized: PUNTOS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 141754681516032
+    m_Localized: TIEMPO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162139032510464
+    m_Localized: Volumen
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -9,14 +9,14 @@ public class BricksController : MonoBehaviour
 
     public int scoreValor = 100;
 
-    public int limiteNoPowerUp = 9; // si el número aleatorio es menor a 9 no sale nada
+    public int limiteNoPowerUp = 6; // si el número aleatorio es menor a 9 no sale nada (9)
     /// <summary>
     /// Números que definen cada powerup
     /// </summary>
     public int rangoPowerUp_1 = 6;
     public int rangoPowerUp_2 = 7;
     public int rangoPowerUp_3 = 8;
-    public int rangoPowerUp_4 = 9;
+    //public int rangoPowerUp_4 = 9;
 
     public GameObject[] powerUpPrefabs;
 
@@ -139,9 +139,9 @@ public class BricksController : MonoBehaviour
 
     void GenerarPowerUp()
     {
-        if (powerUpPrefabs.Length < 4)
+        if (powerUpPrefabs.Length < 3)
         {
-            Debug.LogWarning("Se requieren 4 prefabs de powerup en powerUpPrefabs.");
+            Debug.LogWarning("Se requieren 3 prefabs de powerup en powerUpPrefabs.");
             return;
         }
 
@@ -154,14 +154,14 @@ public class BricksController : MonoBehaviour
 
         GameObject powerUpAInstanciar = null;
 
-        if (numAleatorio >= rangoPowerUp_4)
-        {
-            powerUpAInstanciar = powerUpPrefabs[3];
-        }
-        else if (numAleatorio == rangoPowerUp_3)
+        if (numAleatorio >= rangoPowerUp_3)// El PowerUp de Invertir Movimiento tiene más opciones de salir, únicamente para que pueda ser comprobado en el examen.
         {
             powerUpAInstanciar = powerUpPrefabs[2];
         }
+        /*if (numAleatorio == rangoPowerUp_3)
+        {
+            powerUpAInstanciar = powerUpPrefabs[2];
+        }*/
         else if (numAleatorio == rangoPowerUp_2)
         {
             powerUpAInstanciar = powerUpPrefabs[1];
@@ -234,9 +234,5 @@ public class BricksController : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(explosionSound, transform.position, explosionVolume);
     }
-
-    /*public void DestruirParticulas(GameObject particulas)
-    {
-        Destroy(particulas);
-    }*/
+    
 }

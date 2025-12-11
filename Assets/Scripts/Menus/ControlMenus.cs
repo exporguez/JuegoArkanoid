@@ -124,4 +124,10 @@ public class ControlMenus : MonoBehaviour
         Time.timeScale = 1f;
         Debug.Log("Juego reanudado.");
     }
+
+    public void VolverMenuPause()
+    {        
+        menuPause.SetActive(true);
+    }
+
 }

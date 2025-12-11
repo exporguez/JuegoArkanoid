@@ -3,8 +3,7 @@ using UnityEngine;
 public class MenuOpciones : IEstado
 {
     public void Entrar(MenuStateMachine menus)
-    {
-        menus.controlMenus.CerrarMenus();
+    {       
         menus.controlMenus.menuOpciones.SetActive(true);
     }
 

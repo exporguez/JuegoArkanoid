@@ -87,7 +87,12 @@ public class Score : MonoBehaviour
             Cronometro.instance.DetenerCronometro();
             tiempoFinalPartida = Cronometro.instance.ObtenerTiempoActual();
         }
-
+        
+        if (PowerUps.instance != null)
+        {
+            PowerUps.instance.DestruirPowerUps();
+        }
+        
         ReproducirSonidoVictoria();
         BallController.DestruirTodasLasBolas();
         BallController.ReinstanciarBola();

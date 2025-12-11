@@ -18,7 +18,7 @@ public class BallController : MonoBehaviour
     /// PowerUps Settings
     /// </summary>
     public GameObject bolaPrefab;
-    public bool superFuerzaActiva = false;
+    //public bool superFuerzaActiva = false;
     public float duracionPowerUps = 5f;
 
     private float offsetY = 0.5f;
@@ -116,7 +116,7 @@ public class BallController : MonoBehaviour
 
     }
 
-    public void ActivarSuperFuerza()
+    /*public void ActivarSuperFuerza()
     {
         superFuerzaActiva = true;
         // La SuperFuerza durará 10 segundos
@@ -128,7 +128,7 @@ public class BallController : MonoBehaviour
         yield return new WaitForSeconds(tiempo);
         superFuerzaActiva = false;
         Debug.Log("SuperFuerza terminada.");
-    }
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -312,7 +312,7 @@ public class BallController : MonoBehaviour
         {
             ballRb.linearVelocity = Vector2.zero;
         }
-        superFuerzaActiva = false;
+        //superFuerzaActiva = false;
         gameStarted = false;
 
         PosicionarSobreJugador();

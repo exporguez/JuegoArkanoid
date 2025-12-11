@@ -25,6 +25,9 @@ public class MovimientoJugador : MonoBehaviour
 
     private Vector3 initialPosition;
 
+    bool isMorado = false;
+    
+
     private void Awake()
     {
         if (instance == null)
@@ -101,7 +104,9 @@ public class MovimientoJugador : MonoBehaviour
 
     public void ActivarMovimientoInvertido()
     {
+        
         movimientoInvertido = true;
+        //CambiarColor();
         tiempoFinEfectoInvertido = Time.time + duracionPowerUp;
     }
 
@@ -114,4 +119,15 @@ public class MovimientoJugador : MonoBehaviour
         transform.localScale = tamanoInicial;
         transform.position = initialPosition;
     }
+
+    /*public void CambiarColor()
+    {
+        //SpriteRenderer newColor = GetComponent<SpriteRenderer>();
+        SpriteRenderer colorActual = GetComponent<SpriteRenderer>();
+
+        GetComponent.SpriteRenderer<Color> newColor = Color.magenta;
+        
+        colorActual.color = newColor;
+    }*/
+   
 }

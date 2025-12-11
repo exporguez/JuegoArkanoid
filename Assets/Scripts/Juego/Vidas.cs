@@ -51,6 +51,11 @@ public class Vidas : MonoBehaviour
         {
             Debug.Log("Has perdido");
 
+            if (PowerUps.instance != null)
+            {
+                PowerUps.instance.DestruirPowerUps();
+            }
+
             ReproducirSonidoDerrota();
 
             if (Cronometro.instance != null)

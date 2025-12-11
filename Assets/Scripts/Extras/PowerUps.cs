@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public enum TipoPowerUp { AumentarTamano, MultiBola, MovimientoInvertido, SuperFuerza}
+    public static PowerUps instance;
+    public enum TipoPowerUp { AumentarTamano, MultiBola, MovimientoInvertido} //SuperFuerza}
     public TipoPowerUp tipo;
     public float velocidadCaida = 3f;
 
@@ -26,7 +27,12 @@ public class PowerUps : MonoBehaviour
             ReproducirPremio();
             AplicarEfecto();
             Destroy(gameObject);
-        }    
+        }
+        
+        if(other.CompareTag("Vacio"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void AplicarEfecto()
@@ -53,10 +59,11 @@ public class PowerUps : MonoBehaviour
             {
                 case TipoPowerUp.MultiBola:
                     bola.ActivarMultiBola();
+
                     break;
-                case TipoPowerUp.SuperFuerza:
+                /*case TipoPowerUp.SuperFuerza:
                     bola.ActivarSuperFuerza();
-                    break;
+                    break;*/
             }
         }
     }
@@ -64,5 +71,10 @@ public class PowerUps : MonoBehaviour
     public void ReproducirPremio()
     {
         AudioSource.PlayClipAtPoint(powerUpSound, transform.position, powerUpSoundVolume);
+    }
+
+    public void DestruirPowerUps()
+    {
+        Destroy(gameObject);
     }
 }
