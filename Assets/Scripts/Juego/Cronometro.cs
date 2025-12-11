@@ -7,14 +7,14 @@ public class Cronometro : MonoBehaviour
     public static Cronometro instance;
 
     public TextMeshProUGUI cronometro;
-    
+
 
     public float tiempoTranscurrido = 0f;
     private bool cronometroActivo = false;
 
     public static float tiempoPartida = 0f;
 
-    
+
 
     bool estaJugando = true;
 
@@ -37,7 +37,7 @@ public class Cronometro : MonoBehaviour
 
     private void Update()
     {
-        if(cronometroActivo)
+        if (cronometroActivo)
         {
             tiempoTranscurrido += Time.deltaTime;
             ActualizarTiempo(tiempoTranscurrido);
@@ -74,5 +74,10 @@ public class Cronometro : MonoBehaviour
     public float ObtenerTiempoActual()
     {
         return tiempoTranscurrido;
+    }
+
+    public void ResetearCronometro()
+    {
+        tiempoTranscurrido = 0f;
     }
 }

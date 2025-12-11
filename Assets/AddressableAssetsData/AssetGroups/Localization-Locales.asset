@@ -15,14 +15,14 @@ MonoBehaviour:
   m_GroupName: Localization-Locales
   m_GUID: 0d5b12d975e75e94195286da2a200aa5
   m_SerializeEntries:
-  - m_GUID: 4d0eb5a5a873b1846bc9252e964593fd
-    m_Address: Spanish (Spain) (es-ES)
+  - m_GUID: 809845f284c351b40bcb8c310fee7d25
+    m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 809845f284c351b40bcb8c310fee7d25
-    m_Address: English (en)
+  - m_GUID: f20fc60f2a3f6c44ba9a4168940ab260
+    m_Address: Spanish (es)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

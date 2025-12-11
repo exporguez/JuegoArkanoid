@@ -53,13 +53,13 @@ public class Vidas : MonoBehaviour
 
             ReproducirSonidoDerrota();
 
-            if(Cronometro.instance != null)
+            if (Cronometro.instance != null)
             {
                 Cronometro.instance.DetenerCronometro();
             }
 
             BallController.DestruirTodasLasBolas();
-                       
+
             if (Score.instance != null)
             {
                 Score.instance.GuardarPuntosTotales();
@@ -70,7 +70,6 @@ public class Vidas : MonoBehaviour
                 menus.controlMenus.menuJugar.SetActive(false);
                 menus.controlMenus.screenGameOver.SetActive(true);
             }
-                
         }
     }
 
@@ -90,5 +89,10 @@ public class Vidas : MonoBehaviour
     public void ReproducirSonidoDerrota()
     {
         AudioSource.PlayClipAtPoint(derrotaSound, transform.position, derrotaVolume);
+    }
+
+    public void ResetVidas()
+    {
+        vidasContador = vidas.Length;
     }
 }

@@ -15,46 +15,22 @@ MonoBehaviour:
   m_TableCollectionName: UI_Texto
   m_TableCollectionNameGuidString: ad838b383d302454aa0cc592cd9eac84
   m_Entries:
-  - m_Id: 181728714752
+  - m_Id: 168843812864
     m_Key: _exit
     m_Metadata:
       m_Items: []
-  - m_Id: 776011259904
-    m_Key: _volume
-    m_Metadata:
-      m_Items: []
-  - m_Id: 843065597952
-    m_Key: _pts
-    m_Metadata:
-      m_Items: []
-  - m_Id: 983344095232
-    m_Key: _time
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1068433940480
-    m_Key: _pause
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1195877867520
-    m_Key: _win
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1235035889664
-    m_Key: _defeat
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1476422279168
-    m_Key: _start
+  - m_Id: 162233589760
+    m_Key: New Entry
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 7499732771938238745
+    rid: 7499732771938238802
   references:
     version: 2
     RefIds:
-    - rid: 7499732771938238745
+    - rid: 7499732771938238802
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1765408394222
+        m_CustomEpoch: 1765409953989

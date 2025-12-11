@@ -3590,6 +3590,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658278381}
   m_CullTransparentMesh: 1
+--- !u!1 &661022457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 661022459}
+  - component: {fileID: 661022458}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &661022458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661022457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41ebf4596abacc4c9442eb73b262664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &661022459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661022457}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17901872, y: 1.2208529, z: 1016.2846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689296114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3734,6 +3778,7 @@ GameObject:
   - component: {fileID: 705602048}
   - component: {fileID: 705602050}
   - component: {fileID: 705602049}
+  - component: {fileID: 705602051}
   m_Layer: 5
   m_Name: TextoComienzo
   m_TagString: Untagged
@@ -3780,7 +3825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Presiona ESPACIO para comenzar la partida.
+  m_text: _start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dd0de3eec9d2cdb4b9c3b81fb2321022, type: 2}
   m_sharedMaterial: {fileID: 2914653986588112166, guid: dd0de3eec9d2cdb4b9c3b81fb2321022, type: 2}
@@ -3859,6 +3904,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705602047}
   m_CullTransparentMesh: 1
+--- !u!114 &705602051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705602047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:ad838b383d302454aa0cc592cd9eac84
+    m_TableEntryReference:
+      m_KeyId: 1476422279168
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &706206230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4907,13 +4980,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1500625328}
+        m_TargetAssemblyTypeName: ControlMenus, Assembly-CSharp
+        m_MethodName: ReanudarJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6374,6 +6447,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 661022458}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartNewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1214946503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6698,7 +6783,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:ad838b383d302454aa0cc592cd9eac84
     m_TableEntryReference:
-      m_KeyId: 181728714752
+      m_KeyId: 168843812864
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -6913,6 +6998,18 @@ MonoBehaviour:
       - m_Target: {fileID: 137358286}
         m_TargetAssemblyTypeName: LevelGenerator, Assembly-CSharp
         m_MethodName: BackGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 661022458}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9297,6 +9394,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 661022458}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartNewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1790038041
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11025,6 +11134,7 @@ SceneRoots:
   - {fileID: 1491793266}
   - {fileID: 1500625327}
   - {fileID: 555590754}
+  - {fileID: 661022459}
   - {fileID: 493106731}
   - {fileID: 137358287}
   - {fileID: 1491682454}

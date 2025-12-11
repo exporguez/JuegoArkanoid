@@ -304,6 +304,19 @@ public class BallController : MonoBehaviour
             AudioSource.PlayClipAtPoint(bounceSound, transform.position, bounceVolume);
         }            
     }
+
+    public void ResetBola()
+    {
+        
+        if (ballRb != null)
+        {
+            ballRb.linearVelocity = Vector2.zero;
+        }
+        superFuerzaActiva = false;
+        gameStarted = false;
+
+        PosicionarSobreJugador();
+    }
 }
 
 

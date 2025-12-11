@@ -5,7 +5,7 @@ public class MovimientoJugador : MonoBehaviour
     public static MovimientoJugador instance;
 
     private Rigidbody2D playerRb; //rigidbody del jugador
-    
+
     public float movimientoEjeX;
     public float velocidadPlayer = 8f;
 
@@ -23,6 +23,8 @@ public class MovimientoJugador : MonoBehaviour
     private Vector3 tamanoInicial;
     public bool movimientoInvertido = false;
 
+    private Vector3 initialPosition;
+
     private void Awake()
     {
         if (instance == null)
@@ -35,6 +37,7 @@ public class MovimientoJugador : MonoBehaviour
             return;
         }
         playerRb = GetComponent<Rigidbody2D>(); //obtenemos el rigidbody del jugador
+        initialPosition = transform.position;
     }
 
     private void Start()
@@ -45,7 +48,7 @@ public class MovimientoJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(tiempoFinEfectoTamano > 0 && Time.time >= tiempoFinEfectoTamano)
+        if (tiempoFinEfectoTamano > 0 && Time.time >= tiempoFinEfectoTamano)
         {
             tiempoFinEfectoTamano = 0;
             transform.localScale = tamanoInicial;
@@ -60,7 +63,7 @@ public class MovimientoJugador : MonoBehaviour
         }
 
         movimientoEjeX = Input.GetAxis("Horizontal"); //obtenemos el movimiento en el eje X
-        
+
         if (movimientoInvertido)
         {
             movimientoEjeX = -movimientoEjeX; // Invertir el eje X
@@ -80,7 +83,7 @@ public class MovimientoJugador : MonoBehaviour
         Vector2 velocidadMovimiento = new Vector2(movimientoEjeX * velocidadPlayer, 0);
         playerRb.linearVelocity = velocidadMovimiento;
 
-        
+
         /*
         Vector2 posicionActual = playerRb.position;
 
@@ -100,5 +103,15 @@ public class MovimientoJugador : MonoBehaviour
     {
         movimientoInvertido = true;
         tiempoFinEfectoInvertido = Time.time + duracionPowerUp;
+    }
+
+    public void ResetPlayer()
+    {
+        if (playerRb != null)
+        {
+            playerRb.linearVelocity = Vector2.zero;
+        }
+        transform.localScale = tamanoInicial;
+        transform.position = initialPosition;
     }
 }

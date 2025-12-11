@@ -10,7 +10,7 @@ public class Score : MonoBehaviour
     public TextMeshProUGUI tiempoFinal;
 
     private int puntos;
-    
+
     public int puntosFinales;
     public float tiempoFinalPartida;
 
@@ -26,13 +26,13 @@ public class Score : MonoBehaviour
         {
             instance = this;
         }
-            
+
         else
         {
             Destroy(gameObject);
             return;
         }
-            
+
         puntos = 0;
         bloquesRestantes = 0;
         ActualizarTexto();
@@ -42,11 +42,11 @@ public class Score : MonoBehaviour
     {
         puntos += total;
         ActualizarTexto();
-    }   
+    }
 
     public void ActualizarTexto()
     {
-        if(puntuacion != null)
+        if (puntuacion != null)
         {
             puntuacion.text = puntos.ToString();
         }
@@ -70,7 +70,7 @@ public class Score : MonoBehaviour
     public void BloqueDestruido()
     {
         bloquesRestantes--;
-        if(bloquesRestantes <= 0)
+        if (bloquesRestantes <= 0)
         {
             Victoria();
         }
@@ -97,7 +97,7 @@ public class Score : MonoBehaviour
             puntuacionFinal.text = puntosFinales.ToString();
         }
 
-        if(tiempoFinal != null)
+        if (tiempoFinal != null)
         {
             int minutos = Mathf.FloorToInt(tiempoFinalPartida / 60f);
             int segundos = Mathf.FloorToInt(tiempoFinalPartida % 60f);
@@ -106,7 +106,7 @@ public class Score : MonoBehaviour
             tiempoFinal.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, centesimas);
         }
 
-        if(menus != null && menus.controlMenus != null)
+        if (menus != null && menus.controlMenus != null)
         {
             menus.controlMenus.menuJugar.SetActive(false);
             menus.controlMenus.screenVictoria.SetActive(true);
@@ -119,12 +119,17 @@ public class Score : MonoBehaviour
         puntosFinales = 0;
         tiempoFinalPartida = 0f;
         bloquesRestantes = 0;
-        
+
         ActualizarTexto();
     }
 
     public void ReproducirSonidoVictoria()
     {
         AudioSource.PlayClipAtPoint(victoriaSound, transform.position, victoriaVolume);
+    }
+
+    public void ResetPuntuacion()
+    {
+        puntos = 0;
     }
 }

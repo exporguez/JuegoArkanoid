@@ -80,7 +80,8 @@ public class ControlMenus : MonoBehaviour
     }
 
     public void AbrirMenuPause()
-    {       
+    {
+        PausarJuego();
         menuPause.SetActive(true);
     }
 
@@ -109,5 +110,18 @@ public class ControlMenus : MonoBehaviour
 
         
         LeanTween.scale(popUp, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);
+    }
+
+    public void PausarJuego()
+    {        
+        Time.timeScale = 0f;
+        Debug.Log("Juego en pausa.");
+    }
+
+    public void ReanudarJuego()
+    {        
+        menuPause.SetActive(false);
+        Time.timeScale = 1f;
+        Debug.Log("Juego reanudado.");
     }
 }
