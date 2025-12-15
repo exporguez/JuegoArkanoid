@@ -35,7 +35,7 @@ public class ControlMenus : MonoBehaviour
     }
 
     public void Start()
-    {        
+    {
         VolverMenuPrincipal();
     }
 
@@ -86,7 +86,7 @@ public class ControlMenus : MonoBehaviour
     }
 
     public void AbrirMenuSalir()
-    {       
+    {
         menuSalir.SetActive(true);
     }
 
@@ -94,7 +94,13 @@ public class ControlMenus : MonoBehaviour
     {
         Debug.Log("Saliendo del juego...");
 
-        UnityEditor.EditorApplication.isPlaying = false;
+#if UNITY_EDITOR
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+#endif
+
+        Application.Quit();
 
     }
 
@@ -102,31 +108,31 @@ public class ControlMenus : MonoBehaviour
     {
         LeanTween.cancel(popUp);
 
-        
+
         popUp.SetActive(true);
 
-        
+
         popUp.transform.localScale = Vector3.zero;
 
-        
+
         LeanTween.scale(popUp, Vector3.one, duracionAnimacion).setEase(tipoEaseIn);
     }
 
     public void PausarJuego()
-    {        
+    {
         Time.timeScale = 0f;
         Debug.Log("Juego en pausa.");
     }
 
     public void ReanudarJuego()
-    {        
+    {
         menuPause.SetActive(false);
         Time.timeScale = 1f;
         Debug.Log("Juego reanudado.");
     }
 
     public void VolverMenuPause()
-    {        
+    {
         menuPause.SetActive(true);
     }
 

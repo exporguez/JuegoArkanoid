@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/EscenaExamen.unity
+    guid: 2ce25abf50103374fb0ebb670e5d9b14
+  - enabled: 0
+    path: Assets/Scenes/Arkanoid.unity
+    guid: e088d7e46c002984bbdab7d483b8f76b
+  - enabled: 0
+    path: Assets/Scenes/Arkanoid1.unity
+    guid: eb565de250c6c454cbe9467fab332fbd
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e3db80e452c14a94daf312c2bfb02394, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

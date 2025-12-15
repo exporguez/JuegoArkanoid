@@ -13,9 +13,9 @@ public class BricksController : MonoBehaviour
     /// <summary>
     /// Números que definen cada powerup
     /// </summary>
-    public int rangoPowerUp_1 = 6;
-    public int rangoPowerUp_2 = 7;
-    public int rangoPowerUp_3 = 8;
+    public int rangoPowerUp_1 = 7;
+    public int rangoPowerUp_2 = 8;
+    public int rangoPowerUp_3 = 9;
     //public int rangoPowerUp_4 = 9;
 
     public GameObject[] powerUpPrefabs;

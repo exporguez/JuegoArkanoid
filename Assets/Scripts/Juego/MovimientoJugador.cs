@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class MovimientoJugador : MonoBehaviour
 
     private Vector3 initialPosition;
 
-    bool isMorado = false;
+    private SpriteRenderer spriteRenderer;
+    public Color colorPowerUp = Color.magenta;
+    private Color colorOriginal;
     
 
     private void Awake()
@@ -41,6 +44,13 @@ public class MovimientoJugador : MonoBehaviour
         }
         playerRb = GetComponent<Rigidbody2D>(); //obtenemos el rigidbody del jugador
         initialPosition = transform.position;
+
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        if(spriteRenderer != null )
+        {
+            colorOriginal = spriteRenderer.color;
+        }
+        
     }
 
     private void Start()
@@ -62,6 +72,7 @@ public class MovimientoJugador : MonoBehaviour
         {
             tiempoFinEfectoInvertido = 0;
             movimientoInvertido = false;
+            RestaurarColor();
             Debug.Log("Movimiento Invertido terminado.");
         }
 
@@ -104,10 +115,9 @@ public class MovimientoJugador : MonoBehaviour
 
     public void ActivarMovimientoInvertido()
     {
-        
-        movimientoInvertido = true;
-        //CambiarColor();
-        tiempoFinEfectoInvertido = Time.time + duracionPowerUp;
+        CambiarColor();
+        movimientoInvertido = true;       
+        tiempoFinEfectoInvertido = Time.time + duracionPowerUp;       
     }
 
     public void ResetPlayer()
@@ -118,16 +128,22 @@ public class MovimientoJugador : MonoBehaviour
         }
         transform.localScale = tamanoInicial;
         transform.position = initialPosition;
+        
     }
 
-    /*public void CambiarColor()
+    public void CambiarColor()
     {
-        //SpriteRenderer newColor = GetComponent<SpriteRenderer>();
-        SpriteRenderer colorActual = GetComponent<SpriteRenderer>();
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.color = colorPowerUp;
+        }
+    }
 
-        GetComponent.SpriteRenderer<Color> newColor = Color.magenta;
-        
-        colorActual.color = newColor;
-    }*/
-   
+    public void RestaurarColor()
+    {
+        if(spriteRenderer != null)
+        {
+            spriteRenderer.color = colorOriginal;
+        }
+    }   
 }
